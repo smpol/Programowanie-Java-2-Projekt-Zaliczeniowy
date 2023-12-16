@@ -9,12 +9,11 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Getter
 @Setter
-public class ProductDatabase {
+public class CategoryDatabase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,11 +22,6 @@ public class ProductDatabase {
     @CreatedDate
     private LocalDateTime dateOfAddition;
 
-    private String nameOfProduct;
-    private String descriptionOfProduct;
-    private String priceOfProduct;
-    private String categoryOfProduct;
-    private long countOfProduct;
-    private long idOfCategory;
-
+    private String nameOfCategory;
+    private String descriptionOfCategory;
 }

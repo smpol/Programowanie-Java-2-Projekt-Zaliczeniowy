@@ -34,8 +34,14 @@
             <td th:text="${#temporals.format(product.dateOfAddition, 'dd-MM-yyyy HH:mm')}"></td>
         </tr>
 
+        <!-- Warunek sprawdzający, czy lista produktów jest pusta -->
+        <tr th:if="${#lists.isEmpty(products)}">
+            <td colspan="6" class="text-center" th:text="#{list_of_products.none}"></td>
+        </tr>
         </tbody>
     </table>
+
+    <a href="/addproduct" class="btn btn-primary" th:text="#{index.add_button_product}"></a>
 
 </div>
 
