@@ -9,9 +9,9 @@
 <body>
 
 <div class="contanier">
-    2
+
     <h1 th:text="#{add_product.title}"></h1>
-        <from>
+        <form action="/addproduct" method="post">
             <label th:text="#{add_product.name_of_product_add}" class="form-label"></label><br>
             <input type="text" name="name" th:placeholder="#{add_product.name_of_product}"><br>
             <label th:text="#{add_product.count_of_product_add}" class="form-label"></label><br>
@@ -22,7 +22,7 @@
             <input type="text" name="description" th:placeholder="#{add_product.description_of_product}"><br>
             <input type="submit" class="btn btn-primary">
 
-        </from>
+        </form>
 </div>
 
 
