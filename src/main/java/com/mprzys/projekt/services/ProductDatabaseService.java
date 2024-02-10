@@ -4,6 +4,9 @@ import com.mprzys.projekt.database.ProductDatabase;
 import com.mprzys.projekt.repository.ProductDatabaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Collection;
 
 @Service
 public class ProductDatabaseService {
@@ -16,5 +19,9 @@ public class ProductDatabaseService {
 
     public void addProduct(ProductDatabase productDatabase) {
         productDatabaseRepository.save(productDatabase);
+    }
+
+    public Collection<ProductDatabase> getAllProducts() {
+        return productDatabaseRepository.findAll();
     }
 }

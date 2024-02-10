@@ -1,9 +1,6 @@
 package com.mprzys.projekt.database;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -39,13 +36,18 @@ public class ProductDatabase {
     @Min(value = 1, message = "{product.price_higher_than_one}")
     private String priceOfProduct;
 
-    @NotBlank(message = "{product.category_not_blank}")
-    private String categoryOfProduct;
+//    @NotBlank(message = "{product.category_not_blank}")
+//    private String categoryOfProduct;
 
     @Min(value = 1, message = "{product.count_higher_than_one}")
     private long countOfProduct;
 
-    @NotNull(message = "{product.category_id_not_blank}")
-    private long idOfCategory;
+//    @NotNull(message = "{product.category_id_not_blank}")
+//    private long idOfCategory;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = true)
+    private CategoryDatabase category;
+
 
 }
