@@ -24,4 +24,9 @@ public class ProductDatabaseService {
     public Collection<ProductDatabase> getAllProducts() {
         return productDatabaseRepository.findAll();
     }
+
+    //get name of category by id from database product and name from CategoryDatabase
+    public String getCategoryNameById(long id) {
+        return productDatabaseRepository.findById(id).get().getCategory().getNameOfCategory();
+    }
 }
