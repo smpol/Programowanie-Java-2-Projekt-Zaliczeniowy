@@ -14,7 +14,8 @@
     <form th:action="@{/listofproducts}" method="get">
         <div class="row mb-3">
             <div class="col">
-                <input type="number" class="form-control" name="size"  min="1" th:attr="placeholder=#{list_of_product.count_element}">
+                <input type="number" class="form-control" name="size" min="1"
+                       th:attr="placeholder=#{list_of_product.count_element}">
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-primary">Pokaż</button>
@@ -27,41 +28,53 @@
     </form>
 
     <form th:action="@{/deleteSelectedProducts}" method="post">
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <!-- Corrected sorting links -->
-            <th scope="col"><a th:text="#{list_of_product.id}" th:href="@{/listofproducts(sort='id', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">ID</a></th>
-            <th scope="col"><a th:text="#{list_of_product.name}" th:href="@{/listofproducts(sort='nameOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Nazwa</a></th>
-            <th scope="col"><a th:text="#{list_of_product.count}" th:href="@{/listofproducts(sort='countOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Ilość</a></th>
-            <th scope="col"><a th:text="#{list_of_product.price}" th:href="@{/listofproducts(sort='priceOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Cena</a></th>
-            <th scope="col"><a th:text="#{list_of_product.description}" th:href="@{/listofproducts(sort='descriptionOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Opis</a></th>
-            <th scope="col" th:text="#{list_of_products.category}"></th>
-            <th scope="col"><a th:text="#{list_of_product.date_add}" th:href="@{/listofproducts(sort='dateOfAddition', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Data Dodania</a></th>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <!-- Corrected sorting links -->
+                <th scope="col"><a th:text="#{list_of_product.id}"
+                                   th:href="@{/listofproducts(sort='id', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">ID</a>
+                </th>
+                <th scope="col"><a th:text="#{list_of_product.name}"
+                                   th:href="@{/listofproducts(sort='nameOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Nazwa</a>
+                </th>
+                <th scope="col"><a th:text="#{list_of_product.count}"
+                                   th:href="@{/listofproducts(sort='countOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Ilość</a>
+                </th>
+                <th scope="col"><a th:text="#{list_of_product.price}"
+                                   th:href="@{/listofproducts(sort='priceOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Cena</a>
+                </th>
+                <th scope="col"><a th:text="#{list_of_product.description}"
+                                   th:href="@{/listofproducts(sort='descriptionOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Opis</a>
+                </th>
+                <th scope="col" th:text="#{list_of_products.category}"></th>
+                <th scope="col"><a th:text="#{list_of_product.date_add}"
+                                   th:href="@{/listofproducts(sort='dateOfAddition', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Data
+                    Dodania</a></th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${products}">
-            <td><input type="checkbox" name="selectedProducts" th:value="${product.id}"></td>
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.nameOfProduct}"></td>
-            <td th:text="${product.countOfProduct}"></td>
-            <td th:text="${product.priceOfProduct}"></td>
-            <td th:text="${product.descriptionOfProduct}"></td>
-            <td th:text="${product.category.nameOfCategory}"></td>
-            <td th:text="${#temporals.format(product.dateOfAddition, 'dd-MM-yyyy HH:mm')}"></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td><input type="checkbox" name="selectedProducts" th:value="${product.id}"></td>
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.nameOfProduct}"></td>
+                <td th:text="${product.countOfProduct}"></td>
+                <td th:text="${product.priceOfProduct}"></td>
+                <td th:text="${product.descriptionOfProduct}"></td>
+                <td th:text="${product.category.nameOfCategory}"></td>
+                <td th:text="${#temporals.format(product.dateOfAddition, 'dd-MM-yyyy HH:mm')}"></td>
 
-        </tr>
-        <tr th:if="${#lists.isEmpty(products)}">
-            <td colspan="8" class="text-center" th:text="#{list_of_products.none}"></td>
-        </tr>
-        </tbody>
-    </table>
+            </tr>
+            <tr th:if="${#lists.isEmpty(products)}">
+                <td colspan="8" class="text-center" th:text="#{list_of_products.none}"></td>
+            </tr>
+            </tbody>
+        </table>
         <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
         <button type="submit" class="btn btn-danger">Usuń zaznaczone</button>
-        </form>
+    </form>
     <div class="pagination">
         <!-- Poprawka dla wyświetlania liczby stron -->
         <div class="row">
@@ -69,9 +82,11 @@
         </div>
         <div class="row">
             <!-- Warunkowe wyświetlanie przycisku "Poprzednia" -->
-            <a class="btn btn-primary" th:if="${currentPage > 0}" th:href="@{/listofproducts(page=${currentPage == 0 ? 0 : currentPage - 1}, size=${size}, sort=${sort}, dir=${dir})}">Poprzednia</a>
+            <a class="btn btn-primary" th:if="${currentPage > 0}"
+               th:href="@{/listofproducts(page=${currentPage == 0 ? 0 : currentPage - 1}, size=${size}, sort=${sort}, dir=${dir})}">Poprzednia</a>
             <!-- Warunkowe wyświetlanie przycisku "Następna" -->
-            <a class="btn btn-primary" th:if="${currentPage + 1 < totalPages}" th:href="@{/listofproducts(page=${currentPage + 1}, size=${size}, sort=${sort}, dir=${dir})}">Następna</a>
+            <a class="btn btn-primary" th:if="${currentPage + 1 < totalPages}"
+               th:href="@{/listofproducts(page=${currentPage + 1}, size=${size}, sort=${sort}, dir=${dir})}">Następna</a>
         </div>
     </div>
 

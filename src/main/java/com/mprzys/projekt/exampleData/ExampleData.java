@@ -1,4 +1,4 @@
-package com.mprzys.projekt;
+package com.mprzys.projekt.exampleData;
 
 import com.mprzys.projekt.database.AppUser;
 import com.mprzys.projekt.database.CategoryDatabase;

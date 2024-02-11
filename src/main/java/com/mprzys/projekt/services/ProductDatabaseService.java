@@ -28,4 +28,8 @@ public class ProductDatabaseService {
     public String getCategoryNameById(long id) {
         return productDatabaseRepository.findById(id).get().getCategory().getNameOfCategory();
     }
+
+    public void deleteProduct(int i) {
+        productDatabaseRepository.deleteById((long) i);
+    }
 }

@@ -1,4 +1,4 @@
-package com.mprzys.projekt;
+package com.mprzys.projekt.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
