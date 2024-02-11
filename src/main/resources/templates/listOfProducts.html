@@ -16,7 +16,7 @@
     <form th:action="@{/listofproducts}" method="get">
         <div class="row mb-3">
             <div class="col">
-                <input type="number" class="form-control" name="size" placeholder="Liczba elementów" min="1">
+                <input type="number" class="form-control" name="size"  min="1" th:attr="placeholder=#{list_of_product.count_element}">
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-primary">Pokaż</button>
@@ -33,13 +33,13 @@
         <tr>
             <th scope="col">#</th>
             <!-- Corrected sorting links -->
-            <th scope="col"><a th:href="@{/listofproducts(sort='id', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">ID</a></th>
-            <th scope="col"><a th:href="@{/listofproducts(sort='nameOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Nazwa</a></th>
-            <th scope="col"><a th:href="@{/listofproducts(sort='countOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Ilość</a></th>
-            <th scope="col"><a th:href="@{/listofproducts(sort='priceOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Cena</a></th>
-            <th scope="col"><a th:href="@{/listofproducts(sort='descriptionOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Opis</a></th>
-            <th scope="col" th:text="#{list_of_products.category}">Kategoria</th>
-            <th scope="col"><a th:href="@{/listofproducts(sort='dateOfAddition', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Data Dodania</a></th>
+            <th scope="col"><a th:text="#{list_of_product.id}" th:href="@{/listofproducts(sort='id', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">ID</a></th>
+            <th scope="col"><a th:text="#{list_of_product.name}" th:href="@{/listofproducts(sort='nameOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Nazwa</a></th>
+            <th scope="col"><a th:text="#{list_of_product.count}" th:href="@{/listofproducts(sort='countOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Ilość</a></th>
+            <th scope="col"><a th:text="#{list_of_product.price}" th:href="@{/listofproducts(sort='priceOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Cena</a></th>
+            <th scope="col"><a th:text="#{list_of_product.description}" th:href="@{/listofproducts(sort='descriptionOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Opis</a></th>
+            <th scope="col" th:text="#{list_of_products.category}"></th>
+            <th scope="col"><a th:text="#{list_of_product.date_add}" th:href="@{/listofproducts(sort='dateOfAddition', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Data Dodania</a></th>
 
         </tr>
         </thead>

@@ -5,11 +5,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <title th:text="#{index.title}"></title>
+    <style>
+        .vertical-center {
+            min-height: 100vh; /* 100vh = 100% wysokości okna przeglądarki */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content {
+            text-align: center; /* Wyśrodkowanie tekstu dla elementów wewnątrz */
+        }
+    </style>
 </head>
 <body>
-<h1 th:text="#{index.title}" class=""></h1>
-<a href="/addproduct" class="btn btn-primary" th:text="#{index.add_button_product}"></a>
-<a href="/listofproducts" class="btn btn-primary" th:text="#{index.list_button_product}"></a>
-<a href="/logout" class="btn btn-primary" th:text="#{logout_button}"></a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 vertical-center">
+            <div class="content">
+                <h1 th:text="#{index.title}"></h1>
+                <a href="/addproduct" class="btn btn-primary m-1" th:text="#{index.add_button_product}"></a>
+                <a href="/listofproducts" class="btn btn-primary m-1" th:text="#{index.list_button_product}"></a>
+                <a href="/logout" class="btn btn-primary m-1" th:text="#{logout_button}"></a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

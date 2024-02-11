@@ -19,10 +19,12 @@ public class ExampleData {
     @Autowired
 
     private CategoryDatabaseService categoryDatabaseService;
+
+    private Boolean started = false;
     @PostConstruct
     public void init() {
         // Tworzenie i dodawanie kategorii "Kuchnia"
-        if (categoryDatabaseService.getAllCategories().isEmpty()) {
+        if (categoryDatabaseService.getAllCategories().isEmpty() && !started) {
             CategoryDatabase categoryKitchen = new CategoryDatabase();
             categoryKitchen.setNameOfCategory("Kuchnia");
             categoryKitchen.setDescriptionOfCategory("Produkty do kuchni");
@@ -36,7 +38,7 @@ public class ExampleData {
         }
 
         // Dodawanie produktów, jeśli baza danych jest pusta
-        if (productDatabaseService.getAllProducts().isEmpty()) {
+        if (productDatabaseService.getAllProducts().isEmpty() && !started) {
             ProductDatabase product = new ProductDatabase();
             product.setNameOfProduct("Kubek");
             product.setDescriptionOfProduct("Kubek z logo firmy");
@@ -47,6 +49,7 @@ public class ExampleData {
             product.setCountOfProduct(10);
             productDatabaseService.addProduct(product);
         }
+        started = true;
     }
 
 }
