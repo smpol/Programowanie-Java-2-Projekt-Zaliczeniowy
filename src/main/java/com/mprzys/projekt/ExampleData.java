@@ -1,11 +1,15 @@
 package com.mprzys.projekt;
 
+import com.mprzys.projekt.database.AppUser;
 import com.mprzys.projekt.database.CategoryDatabase;
 import com.mprzys.projekt.database.ProductDatabase;
+import com.mprzys.projekt.repository.UserRepository;
 import com.mprzys.projekt.services.CategoryDatabaseService;
+import com.mprzys.projekt.services.CustomUserDetailsService;
 import com.mprzys.projekt.services.ProductDatabaseService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
@@ -19,6 +23,12 @@ public class ExampleData {
     @Autowired
 
     private CategoryDatabaseService categoryDatabaseService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private Boolean started = false;
     @PostConstruct
@@ -49,6 +59,15 @@ public class ExampleData {
             product.setCountOfProduct(10);
             productDatabaseService.addProduct(product);
         }
+        //Dodanie przykladowego uzytkownika do bazy danych jesli jest pusta
+        if (!started) {
+            AppUser appUser = new AppUser();
+            appUser.setUsername("user");
+            appUser.setPassword(passwordEncoder.encode("user"));
+            userRepository.save(appUser);
+        }
+
+
         started = true;
     }
 

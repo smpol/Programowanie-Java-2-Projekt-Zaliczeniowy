@@ -4,8 +4,7 @@ import com.mprzys.projekt.database.ProductDatabase;
 import com.mprzys.projekt.repository.ProductDatabaseRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,12 +15,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class ListOfProducts {
     private final ProductDatabaseRepository productDatabaseRepository;
 
     public ListOfProducts(ProductDatabaseRepository productDatabaseRepository) {
         this.productDatabaseRepository = productDatabaseRepository;
+    }
+
+    @PostMapping("/deleteSelectedProducts")
+    public String deleteSelectedProducts(@RequestParam(required = false) List<Long> selectedProducts) {
+        // Sprawdź, czy lista jest pusta lub null
+        if (selectedProducts == null || selectedProducts.isEmpty()) {
+            return "redirect:/listofproducts"; // Nic nie rób, jeśli lista jest pusta lub null
+        }
+
+        productDatabaseRepository.deleteAllById(selectedProducts);
+        return "redirect:/listofproducts";
     }
 
     @GetMapping("/listofproducts")

@@ -11,8 +11,6 @@
 <div class="container">
 
     <h1 th:text="#{list_of_products.title}"></h1>
-
-    <!-- Formularz do określenia liczby elementów do wyświetlenia -->
     <form th:action="@{/listofproducts}" method="get">
         <div class="row mb-3">
             <div class="col">
@@ -28,6 +26,7 @@
         <input type="hidden" name="dir" th:value="${dir}">
     </form>
 
+    <form th:action="@{/deleteSelectedProducts}" method="post">
     <table class="table">
         <thead>
         <tr>
@@ -45,7 +44,7 @@
         </thead>
         <tbody>
         <tr th:each="product : ${products}">
-            <td><input type="checkbox" th:value="${product.id}"></td> <!-- Checkbox dla każdego produktu -->
+            <td><input type="checkbox" name="selectedProducts" th:value="${product.id}"></td>
             <td th:text="${product.id}"></td>
             <td th:text="${product.nameOfProduct}"></td>
             <td th:text="${product.countOfProduct}"></td>
@@ -56,10 +55,13 @@
 
         </tr>
         <tr th:if="${#lists.isEmpty(products)}">
-            <td colspan="7" class="text-center" th:text="#{list_of_products.none}"></td>
+            <td colspan="8" class="text-center" th:text="#{list_of_products.none}"></td>
         </tr>
         </tbody>
     </table>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        <button type="submit" class="btn btn-danger">Usuń zaznaczone</button>
+        </form>
     <div class="pagination">
         <!-- Poprawka dla wyświetlania liczby stron -->
         <div class="row">
