@@ -39,6 +39,7 @@
             <th scope="col"><a th:href="@{/listofproducts(sort='priceOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Cena</a></th>
             <th scope="col"><a th:href="@{/listofproducts(sort='descriptionOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Opis</a></th>
             <th scope="col"><a th:href="@{/listofproducts(sort='dateOfAddition', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Data Dodania</a></th>
+            <th scope="col">Kategorie</th>
         </tr>
         </thead>
         <tbody>
@@ -50,6 +51,7 @@
             <td th:text="${product.priceOfProduct}"></td>
             <td th:text="${product.descriptionOfProduct}"></td>
             <td th:text="${#temporals.format(product.dateOfAddition, 'dd-MM-yyyy HH:mm')}"></td>
+            <td th:text="${product.categories}"></td>
         </tr>
         <tr th:if="${#lists.isEmpty(products)}">
             <td colspan="7" class="text-center" th:text="#{list_of_products.none}"></td>

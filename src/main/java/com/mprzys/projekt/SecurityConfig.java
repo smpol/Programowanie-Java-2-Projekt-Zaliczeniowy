@@ -20,7 +20,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) throws Exception {
         http
-                .csrf().disable()
+//                .csrf().disable()
                 .authorizeRequests(authz -> authz
                         .requestMatchers("/register").permitAll()
                         .anyRequest().authenticated())
