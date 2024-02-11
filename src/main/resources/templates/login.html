@@ -1,33 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pl-PL" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title th:text="#{login.title}">Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .centered-form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ustawienie minimalnej wysokości na 100% wysokości widoku */
+        }
+
+        .form-width {
+            width: 100%;
+            max-width: 400px; /* Maksymalna szerokość formularza */
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h2 class="mt-5" th:text="#{login.heading}"></h2>
-    <form action="/login" method="post" class="mt-4">
-        <div class="form-group">
-            <label for="username" th:text="#{login.username}"></label>
-            <input type="text" id="username" name="username" required class="form-control">
+<div class="container centered-form-container">
+    <div class="form-width">
+        <h2 class="text-center mt-5" th:text="#{login.heading}">Login</h2>
+        <form action="/login" method="post" class="mt-4">
+            <div class="form-group">
+                <label for="username" th:text="#{login.username}">Username</label>
+                <input type="text" id="username" name="username" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password" th:text="#{login.password}">Password</label>
+                <input type="password" id="password" name="password" required class="form-control">
+            </div>
+            <div class="form-group" th:if="${loginError}" th:text="${loginError}"></div>
+            <div class="form-group form-check">
+                <input type="checkbox" id="remember-me" name="remember-me" class="form-check-input">
+                <label for="remember-me" class="form-check-label" th:text="#{login.rememberMe}">Remember Me</label>
+            </div>
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}" />
+            <button type="submit" class="btn btn-primary btn-block" th:text="#{login.submit}">Submit</button>
+        </form>
+        <div class="text-center mt-3">
+            <span th:text="#{login.register_question}"></span>
+            <a href="/register" th:text="#{login.register}"></a>
         </div>
-        <div class="form-group">
-            <label for="password" th:text="#{login.password}"></label>
-            <input type="password" id="password" name="password" required class="form-control">
-        </div>
-        <div class="form-group" th:if="${loginError}" th:text="${loginError}"></div>
-        <div class="form-group form-check">
-            <input type="checkbox" id="remember-me" name="remember-me" class="form-check-input">
-            <label for="remember-me" class="form-check-label" th:text="#{login.rememberMe}">/label>
-        </div>
-        <input type="hidden"
-               th:name="${_csrf.parameterName}"
-               th:value="${_csrf.token}" />
-        <button type="submit" class="btn btn-primary" th:text="#{login.submit}"></button>
-    </form>
-    <span class="mt-3" th:text="#{login.register_question}"></span>
-    <a href="/register" th:text="#{login.register}"></a>
+    </div>
 </div>
 </body>
 </html>

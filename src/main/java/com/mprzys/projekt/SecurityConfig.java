@@ -31,7 +31,9 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/login").permitAll())
-                .rememberMe(rememberMe -> rememberMe.tokenValiditySeconds(86400))
+                .rememberMe(rememberMe -> rememberMe
+                        .tokenValiditySeconds(86400)
+                        .key("remember-me"))
                 // Skonfiguruj tutaj UserDetailsService i PasswordEncoder
                 .userDetailsService(userDetailsService);
 //                .httpBasic(AbstractHttpConfigurer::disable);
