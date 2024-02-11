@@ -1,18 +1,18 @@
 package com.mprzys.projekt.pages;
 
-import com.mprzys.projekt.database.CategoryDatabase;
 import com.mprzys.projekt.database.ProductDatabase;
 import com.mprzys.projekt.services.CategoryDatabaseService;
 import com.mprzys.projekt.services.ProductDatabaseService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-
 import java.time.LocalDateTime;
 
 @Controller
@@ -36,7 +36,6 @@ public class AddProductController {
         model.addAttribute("categories", categoryDatabaseService.getAllCategories()); // Dodaj wszystkie kategorie do modelu (dla listy rozwijanej w formularzu
         return "addProduct";
     }
-
 
 
     @PostMapping

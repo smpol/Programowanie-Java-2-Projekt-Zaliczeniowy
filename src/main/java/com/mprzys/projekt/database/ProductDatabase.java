@@ -3,14 +3,12 @@ package com.mprzys.projekt.database;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -28,7 +26,7 @@ public class ProductDatabase {
     private String nameOfProduct;
 
     @NotBlank(message = "{product.description_not_blank}")
-    @Size(min=1, max = 1000, message = "{product.description_min_max}")
+    @Size(min = 1, max = 1000, message = "{product.description_min_max}")
     private String descriptionOfProduct;
 
     // Używamy adnotacji @Min z przykładową wartością dla ceny większej od 1

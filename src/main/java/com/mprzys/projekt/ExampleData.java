@@ -5,7 +5,6 @@ import com.mprzys.projekt.database.CategoryDatabase;
 import com.mprzys.projekt.database.ProductDatabase;
 import com.mprzys.projekt.repository.UserRepository;
 import com.mprzys.projekt.services.CategoryDatabaseService;
-import com.mprzys.projekt.services.CustomUserDetailsService;
 import com.mprzys.projekt.services.ProductDatabaseService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +30,7 @@ public class ExampleData {
     private PasswordEncoder passwordEncoder;
 
     private Boolean started = false;
+
     @PostConstruct
     public void init() {
         // Tworzenie i dodawanie kategorii "Kuchnia"
