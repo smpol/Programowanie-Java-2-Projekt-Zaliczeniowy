@@ -26,7 +26,7 @@ public class UserProfileController {
         this.appUserProfileRepository = appUserProfileRepository;
     }
 
-    @GetMapping("/user/profile")
+    @GetMapping("/profile")
     public String userProfileForm(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
@@ -61,7 +61,7 @@ public class UserProfileController {
             existingProfile.setPhoneNumber(profile.getPhoneNumber());
 
             appUserProfileRepository.save(existingProfile);
-            return "redirect:/user/profile";
+            return "redirect:/profile";
         }
 
         // Jeśli użytkownik nie istnieje, przekieruj do strony błędu
