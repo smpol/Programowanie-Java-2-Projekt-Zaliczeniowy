@@ -1,9 +1,9 @@
 package com.mprzys.projekt.exampleData;
 
-import com.mprzys.projekt.database.AppUser;
+import com.mprzys.projekt.database.AppUserDatabase;
 import com.mprzys.projekt.database.CategoryDatabase;
 import com.mprzys.projekt.database.ProductDatabase;
-import com.mprzys.projekt.repository.UserRepository;
+import com.mprzys.projekt.repository.AppUserRepository;
 import com.mprzys.projekt.services.CategoryDatabaseService;
 import com.mprzys.projekt.services.ProductDatabaseService;
 import jakarta.annotation.PostConstruct;
@@ -24,7 +24,7 @@ public class ExampleData {
     private CategoryDatabaseService categoryDatabaseService;
 
     @Autowired
-    private UserRepository userRepository;
+    private AppUserRepository appUserRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -61,10 +61,10 @@ public class ExampleData {
         }
         //Dodanie przykladowego uzytkownika do bazy danych jesli jest pusta
         if (!started) {
-            AppUser appUser = new AppUser();
-            appUser.setUsername("admin");
-            appUser.setPassword(passwordEncoder.encode("admin"));
-            userRepository.save(appUser);
+            AppUserDatabase appUserDatabase = new AppUserDatabase();
+            appUserDatabase.setUsername("admin");
+            appUserDatabase.setPassword(passwordEncoder.encode("admin"));
+            appUserRepository.save(appUserDatabase);
         }
 
 

@@ -1,8 +1,8 @@
 package com.mprzys.projekt.webmvctest;
 
 import com.mprzys.projekt.pages.LoginController;
+import com.mprzys.projekt.repository.AppUserRepository;
 import com.mprzys.projekt.repository.ProductDatabaseRepository;
-import com.mprzys.projekt.repository.UserRepository;
 import com.mprzys.projekt.services.CategoryDatabaseService;
 import com.mprzys.projekt.services.ProductDatabaseService;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ public class RegisterAndLoginControllerTest {
     private ProductDatabaseRepository productDatabaseRepository;
 
     @MockBean
-    private UserRepository userRepository;
+    private AppUserRepository appUserRepository;
 
     @MockBean
     private ProductDatabaseService productDatabaseService;

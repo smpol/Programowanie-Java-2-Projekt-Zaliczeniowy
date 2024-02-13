@@ -1,7 +1,7 @@
 package com.mprzys.projekt.services;
 
-import com.mprzys.projekt.database.AppUser;
-import com.mprzys.projekt.repository.UserRepository;
+import com.mprzys.projekt.database.AppUserDatabase;
+import com.mprzys.projekt.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,26 +14,26 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class AppUserService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final AppUserRepository appUserRepository;
 
     @Autowired
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public AppUserService(AppUserRepository appUserRepository) {
+        this.appUserRepository = appUserRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser appUser = userRepository.findByUsername(username)
+        AppUserDatabase appUserDatabase = appUserRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("No user found with username: " + username));
 
         // Używanie klasy User z Spring Security do tworzenia obiektu UserDetails
-        return new User(appUser.getUsername(), appUser.getPassword(), Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+        return new User(appUserDatabase.getUsername(), appUserDatabase.getPassword(), Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
     }
 
-    public List<AppUser> getAllUsers() {
-        return userRepository.findAll();
+    public List<AppUserDatabase> getAllUsers() {
+        return appUserRepository.findAll();
     }
 }
 

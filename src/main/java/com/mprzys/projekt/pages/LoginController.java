@@ -1,7 +1,7 @@
 package com.mprzys.projekt.pages;
 
-import com.mprzys.projekt.database.AppUser;
-import com.mprzys.projekt.repository.UserRepository;
+import com.mprzys.projekt.database.AppUserDatabase;
+import com.mprzys.projekt.repository.AppUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private AppUserRepository appUserRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -41,20 +41,20 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String processRegistration(Model model, AppUser appUserForm) {
-        logger.info("POST request to /register for user: {}", appUserForm.getUsername());
-        if (userRepository.findByUsername(appUserForm.getUsername()).isPresent()) {
+    public String processRegistration(Model model, AppUserDatabase appUserDatabaseForm) {
+        logger.info("POST request to /register for user: {}", appUserDatabaseForm.getUsername());
+        if (appUserRepository.findByUsername(appUserDatabaseForm.getUsername()).isPresent()) {
             model.addAttribute("registrationError", "Username already exists");
             return "register";
         }
         try {
-            AppUser appUser = new AppUser();
-            appUser.setUsername(appUserForm.getUsername());
-            appUser.setPassword(passwordEncoder.encode(appUserForm.getPassword()));
-            userRepository.save(appUser);
+            AppUserDatabase appUserDatabase = new AppUserDatabase();
+            appUserDatabase.setUsername(appUserDatabaseForm.getUsername());
+            appUserDatabase.setPassword(passwordEncoder.encode(appUserDatabaseForm.getPassword()));
+            appUserRepository.save(appUserDatabase);
             return "redirect:/login";
         } catch (Exception e) {
-            logger.error("Error during registration for user: {}", appUserForm.getUsername(), e);
+            logger.error("Error during registration for user: {}", appUserDatabaseForm.getUsername(), e);
             model.addAttribute("registrationError", "An error occurred during the registration process. Please try again.");
             return "register";
         }

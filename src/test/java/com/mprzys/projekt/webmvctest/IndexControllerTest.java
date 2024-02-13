@@ -1,10 +1,10 @@
 package com.mprzys.projekt.webmvctest;
 
-import com.mprzys.projekt.database.AppUser;
+import com.mprzys.projekt.database.AppUserDatabase;
 import com.mprzys.projekt.database.ProductDatabase;
 import com.mprzys.projekt.pages.IndexController;
+import com.mprzys.projekt.repository.AppUserRepository;
 import com.mprzys.projekt.repository.ProductDatabaseRepository;
-import com.mprzys.projekt.repository.UserRepository;
 import com.mprzys.projekt.services.CategoryDatabaseService;
 import com.mprzys.projekt.services.ProductDatabaseService;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +40,7 @@ public class IndexControllerTest {
     private ProductDatabaseRepository productDatabaseRepository;
 
     @MockBean
-    private UserRepository userRepository;
+    private AppUserRepository appUserRepository;
 
     @MockBean
     private ProductDatabaseService productDatabaseService; // Dodaj tę linijkę
@@ -54,10 +54,10 @@ public class IndexControllerTest {
 
     @BeforeEach
     public void setupUser() {
-        AppUser appUser = new AppUser();
-        appUser.setUsername("admin");
-        appUser.setPassword(passwordEncoder.encode("admin"));
-        userRepository.save(appUser);
+        AppUserDatabase appUserDatabase = new AppUserDatabase();
+        appUserDatabase.setUsername("admin");
+        appUserDatabase.setPassword(passwordEncoder.encode("admin"));
+        appUserRepository.save(appUserDatabase);
     }
 
     @Test

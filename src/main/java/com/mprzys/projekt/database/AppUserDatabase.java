@@ -8,12 +8,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "users")
-public class AppUser {
+public class AppUserDatabase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
     private String password;
+
+//    @OneToOne
+//    private AppUserDetailsDatabase userDetails;
 
 }
