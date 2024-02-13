@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Profile</title>
+</head>
+<body>
+<h1>User Profile</h1>
+<div th:if="${profile != null}">
+    <p>Name: <span th:text="${profile.firstName}">First Name</span> <span th:text="${profile.lastName}">Last Name</span>
+    </p>
+    <p>Email: <span th:text="${profile.email}">Email</span></p>
+    <p>Phone: <span th:text="${profile.phoneNumber}">Phone Number</span></p>
+</div>
+
+<h2>Update Profile</h2>
+<form action="/user/updateProfile" method="post">
+    <!-- Dodanie tokenu CSRF -->
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
+    <input type="hidden" name="id" th:value="${profile.id}"/>
+    <input type="text" name="firstName" placeholder="First Name" th:value="${profile.firstName}"/>
+    <input type="text" name="lastName" placeholder="Last Name" th:value="${profile.lastName}"/>
+    <input type="email" name="email" placeholder="Email" th:value="${profile.email}"/>
+    <input type="text" name="phoneNumber" placeholder="Phone Number" th:value="${profile.phoneNumber}"/>
+    <button type="submit">Update</button>
+</form>
+
+</body>
+</html>

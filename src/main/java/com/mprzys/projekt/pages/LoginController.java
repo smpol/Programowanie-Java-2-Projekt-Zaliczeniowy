@@ -1,6 +1,7 @@
 package com.mprzys.projekt.pages;
 
 import com.mprzys.projekt.database.AppUserDatabase;
+import com.mprzys.projekt.database.AppUserProfile;
 import com.mprzys.projekt.repository.AppUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,9 +50,26 @@ public class LoginController {
         }
         try {
             AppUserDatabase appUserDatabase = new AppUserDatabase();
+            AppUserProfile appUserProfile = new AppUserProfile();
+
+            // Konfiguracja danych użytkownika
             appUserDatabase.setUsername(appUserDatabaseForm.getUsername());
             appUserDatabase.setPassword(passwordEncoder.encode(appUserDatabaseForm.getPassword()));
+
+            // Ustawienie wzajemnych relacji między encjami
+            appUserProfile.setAppUser(appUserDatabase); // Zakładam, że ta metoda ustawia powiązanie z AppUserDatabase
+            appUserDatabase.setAppUserProfile(appUserProfile);
+
+            // Zapisz tylko appUserDatabase; appUserProfile zostanie zapisane kaskadowo
+            // Upewnij się, że w encji AppUserDatabase kaskadowość jest ustawiona na CascadeType.ALL lub podobne
             appUserRepository.save(appUserDatabase);
+
+            logger.info("Registration successful for user: {}", appUserDatabaseForm.getUsername());
+            //print all users from database
+            appUserRepository.findAll().forEach(user -> logger.info("User: {}", user.getUsername()));
+            //print all profiles from database
+            appUserRepository.findAll().forEach(user -> logger.info("Profile: {}", user.getAppUserProfile()));
+
             return "redirect:/login";
         } catch (Exception e) {
             logger.error("Error during registration for user: {}", appUserDatabaseForm.getUsername(), e);

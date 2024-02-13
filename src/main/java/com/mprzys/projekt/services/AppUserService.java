@@ -32,6 +32,7 @@ public class AppUserService implements UserDetailsService {
         return new User(appUserDatabase.getUsername(), appUserDatabase.getPassword(), Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
     }
 
+
     public List<AppUserDatabase> getAllUsers() {
         return appUserRepository.findAll();
     }

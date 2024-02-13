@@ -16,7 +16,7 @@ public class AppUserDatabase {
     private String username;
     private String password;
 
-//    @OneToOne
-//    private AppUserDetailsDatabase userDetails;
+    @OneToOne(mappedBy = "appUserDatabase", cascade = CascadeType.ALL, orphanRemoval = true)
+    private AppUserProfile appUserProfile;
 
 }

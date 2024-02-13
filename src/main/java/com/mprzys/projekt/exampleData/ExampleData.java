@@ -1,6 +1,5 @@
 package com.mprzys.projekt.exampleData;
 
-import com.mprzys.projekt.database.AppUserDatabase;
 import com.mprzys.projekt.database.CategoryDatabase;
 import com.mprzys.projekt.database.ProductDatabase;
 import com.mprzys.projekt.repository.AppUserRepository;
@@ -60,12 +59,12 @@ public class ExampleData {
             productDatabaseService.addProduct(product);
         }
         //Dodanie przykladowego uzytkownika do bazy danych jesli jest pusta
-        if (!started) {
-            AppUserDatabase appUserDatabase = new AppUserDatabase();
-            appUserDatabase.setUsername("admin");
-            appUserDatabase.setPassword(passwordEncoder.encode("admin"));
-            appUserRepository.save(appUserDatabase);
-        }
+//        if (!started) {
+//            AppUserDatabase appUserDatabase = new AppUserDatabase();
+//            appUserDatabase.setUsername("admin");
+//            appUserDatabase.setPassword(passwordEncoder.encode("admin"));
+//            appUserRepository.save(appUserDatabase);
+//        }
 
 
         started = true;
