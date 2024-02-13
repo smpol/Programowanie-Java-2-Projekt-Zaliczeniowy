@@ -62,8 +62,8 @@ public class ExampleData {
         //Dodanie przykladowego uzytkownika do bazy danych jesli jest pusta
         if (!started) {
             AppUser appUser = new AppUser();
-            appUser.setUsername("user");
-            appUser.setPassword(passwordEncoder.encode("user"));
+            appUser.setUsername("admin");
+            appUser.setPassword(passwordEncoder.encode("admin"));
             userRepository.save(appUser);
         }
 

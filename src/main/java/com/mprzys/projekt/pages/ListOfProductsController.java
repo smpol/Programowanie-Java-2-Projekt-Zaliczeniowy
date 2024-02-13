@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class ListOfProducts {
+public class ListOfProductsController {
     private final ProductDatabaseRepository productDatabaseRepository;
 
-    public ListOfProducts(ProductDatabaseRepository productDatabaseRepository) {
+    public ListOfProductsController(ProductDatabaseRepository productDatabaseRepository) {
         this.productDatabaseRepository = productDatabaseRepository;
     }
 

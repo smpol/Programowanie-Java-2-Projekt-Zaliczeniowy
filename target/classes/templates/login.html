@@ -30,7 +30,7 @@
                 <label for="password" th:text="#{login.password}">Password</label>
                 <input type="password" id="password" name="password" required class="form-control">
             </div>
-            <div class="form-group" th:if="${loginError}" th:text="${loginError}"></div>
+            <div class="form-group alert alert-danger" th:if="${loginError}" th:text="#{login.error_login}"></div>
             <div class="form-group form-check">
                 <input type="checkbox" id="remember-me" name="remember-me" class="form-check-input">
                 <label for="remember-me" class="form-check-label" th:text="#{login.rememberMe}">Remember Me</label>

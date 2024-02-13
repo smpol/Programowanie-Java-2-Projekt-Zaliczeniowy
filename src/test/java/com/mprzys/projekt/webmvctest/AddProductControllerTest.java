@@ -2,7 +2,7 @@ package com.mprzys.projekt.webmvctest;
 
 import com.mprzys.projekt.database.AppUser;
 import com.mprzys.projekt.database.ProductDatabase;
-import com.mprzys.projekt.pages.ListOfProductsController;
+import com.mprzys.projekt.pages.AddProductController;
 import com.mprzys.projekt.repository.ProductDatabaseRepository;
 import com.mprzys.projekt.repository.UserRepository;
 import com.mprzys.projekt.services.CategoryDatabaseService;
@@ -31,8 +31,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@WebMvcTest(ListOfProductsController.class)
-public class ListOfProductsControllerTest {
+@WebMvcTest(AddProductController.class)
+public class AddProductControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -49,7 +49,6 @@ public class ListOfProductsControllerTest {
     @MockBean
     private CategoryDatabaseService categoryDatabaseService; // Dodaj tę linijkę
 
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -63,21 +62,20 @@ public class ListOfProductsControllerTest {
 
     @Test
     @WithMockUser(username = "admin", password = "admin")
-    public void testListOfProductsLogged() throws Exception {
+    public void testAddProduct() throws Exception {
         Page<ProductDatabase> productPage = new PageImpl<>(Collections.emptyList(), PageRequest.of(0, 10), 0);
 
         when(productDatabaseRepository.findAll(any(Pageable.class))).thenReturn(productPage);
 
-        mockMvc.perform(get("/listofproducts"))
+        mockMvc.perform(get("/addproduct"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("listOfProducts"));
+                .andExpect(view().name("addProduct"));
     }
 
-
     @Test
-    public void testListOfProductsNotLogged() throws Exception {
-        mockMvc.perform(get("/listofproducts"))
-                .andExpect(status().isUnauthorized());
+    public void testAddProductNotLogged() throws Exception {
+        mockMvc.perform(get("/addproduct"))
+                .andExpect(status().isUnauthorized()); // Sprawdza, czy status to 401 Unauthorized
     }
 
     @TestConfiguration
@@ -88,4 +86,6 @@ public class ListOfProductsControllerTest {
         }
     }
 
+
 }
+

@@ -24,7 +24,7 @@
                th:name="${_csrf.parameterName}"
                th:value="${_csrf.token}"/>
     </form>
-    <div th:if="${registrationError}" th:text="${registrationError}" class="alert alert-danger"></div>
+    <div th:if="${registrationError}" th:text="#{register.error_register}" class="alert alert-danger"></div>
 </div>
 
 </body>
