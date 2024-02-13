@@ -24,7 +24,6 @@ public class ListOfProductsController {
 
     @PostMapping("/deleteSelectedProducts")
     public String deleteSelectedProducts(@RequestParam(required = false) List<Long> selectedProducts) {
-        // Sprawdź, czy lista jest pusta lub null
         if (selectedProducts == null || selectedProducts.isEmpty()) {
             return "redirect:/listofproducts"; // Nic nie rób, jeśli lista jest pusta lub null
         }

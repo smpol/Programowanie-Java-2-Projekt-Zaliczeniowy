@@ -64,7 +64,6 @@ public class UserProfileController {
             return "redirect:/profile";
         }
 
-        // Jeśli użytkownik nie istnieje, przekieruj do strony błędu
         return "redirect:/error";
     }
 }

@@ -28,10 +28,8 @@ public class AppUserService implements UserDetailsService {
         AppUserDatabase appUserDatabase = appUserRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("No user found with username: " + username));
 
-        // Używanie klasy User z Spring Security do tworzenia obiektu UserDetails
         return new User(appUserDatabase.getUsername(), appUserDatabase.getPassword(), Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
     }
-
 
     public List<AppUserDatabase> getAllUsers() {
         return appUserRepository.findAll();

@@ -43,12 +43,12 @@ public class AddProductController {
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors()); // Wyświetl błędy walidacji w konsoli
             model.addAttribute("categories", categoryDatabaseService.getAllCategories());
-            return "addProduct"; // W przypadku błędów walidacji, użytkownik zostanie przekierowany z powrotem do formularza
+            return "addProduct";
         }
 
-        productDatabase.setDateOfAddition(LocalDateTime.now()); // Ustaw aktualną datę dodania
-        productDatabaseService.addProduct(productDatabase); // Zapisz produkt do bazy danych
+        productDatabase.setDateOfAddition(LocalDateTime.now());
+        productDatabaseService.addProduct(productDatabase);
 
-        return "redirect:/listofproducts"; // Przekieruj na listę produktów po pomyślnym dodaniu
+        return "redirect:/listofproducts";
     }
 }

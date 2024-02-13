@@ -52,23 +52,15 @@ public class LoginController {
             AppUserDatabase appUserDatabase = new AppUserDatabase();
             AppUserProfile appUserProfile = new AppUserProfile();
 
-            // Konfiguracja danych użytkownika
             appUserDatabase.setUsername(appUserDatabaseForm.getUsername());
             appUserDatabase.setPassword(passwordEncoder.encode(appUserDatabaseForm.getPassword()));
 
-            // Ustawienie wzajemnych relacji między encjami
-            appUserProfile.setAppUser(appUserDatabase); // Zakładam, że ta metoda ustawia powiązanie z AppUserDatabase
+            appUserProfile.setAppUser(appUserDatabase);
             appUserDatabase.setAppUserProfile(appUserProfile);
 
-            // Zapisz tylko appUserDatabase; appUserProfile zostanie zapisane kaskadowo
-            // Upewnij się, że w encji AppUserDatabase kaskadowość jest ustawiona na CascadeType.ALL lub podobne
             appUserRepository.save(appUserDatabase);
 
             logger.info("Registration successful for user: {}", appUserDatabaseForm.getUsername());
-            //print all users from database
-            appUserRepository.findAll().forEach(user -> logger.info("User: {}", user.getUsername()));
-            //print all profiles from database
-            appUserRepository.findAll().forEach(user -> logger.info("Profile: {}", user.getAppUserProfile()));
 
             return "redirect:/login";
         } catch (Exception e) {
