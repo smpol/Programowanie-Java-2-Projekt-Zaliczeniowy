@@ -32,26 +32,25 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <!-- Corrected sorting links -->
                 <th scope="col"><a th:text="#{list_of_product.id}"
-                                   th:href="@{/listofproducts(sort='id', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">ID</a>
+                                   th:href="@{/listofproducts(sort='id', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}"></a>
                 </th>
                 <th scope="col"><a th:text="#{list_of_product.name}"
-                                   th:href="@{/listofproducts(sort='nameOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Nazwa</a>
+                                   th:href="@{/listofproducts(sort='nameOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}"></a>
                 </th>
                 <th scope="col"><a th:text="#{list_of_product.count}"
-                                   th:href="@{/listofproducts(sort='countOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Ilość</a>
+                                   th:href="@{/listofproducts(sort='countOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}"></a>
                 </th>
                 <th scope="col"><a th:text="#{list_of_product.price}"
-                                   th:href="@{/listofproducts(sort='priceOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Cena</a>
+                                   th:href="@{/listofproducts(sort='priceOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}"></a>
                 </th>
                 <th scope="col"><a th:text="#{list_of_product.description}"
-                                   th:href="@{/listofproducts(sort='descriptionOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Opis</a>
+                                   th:href="@{/listofproducts(sort='descriptionOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}"></a>
                 </th>
                 <th scope="col" th:text="#{list_of_products.category}"></th>
                 <th scope="col"><a th:text="#{list_of_product.date_add}"
-                                   th:href="@{/listofproducts(sort='dateOfAddition', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">Data
-                    Dodania</a></th>
+                                   th:href="@{/listofproducts(sort='dateOfAddition', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">
+                </a></th>
 
             </tr>
             </thead>
@@ -73,22 +72,24 @@
             </tbody>
         </table>
         <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-        <button type="submit" class="btn btn-danger">Usuń zaznaczone</button>
+        <button type="submit" class="btn btn-danger" th:text="#{listofproducsts.deletebutton}"></button>
     </form>
     <div class="pagination">
         <!-- Poprawka dla wyświetlania liczby stron -->
         <div class="row">
-            <span>Strona [[${currentPage + 1}]] z [[${totalPages > 0 ? totalPages : 1}]]</span>
+            <!--            <span>Strona [[${currentPage + 1}]] z [[${totalPages > 0 ? totalPages : 1}]]</span>-->
+            <span th:text="#{list_of_products.page} + ' '+ ${currentPage + 1} + ' ' + #{list_of_products.of} + ' '+ ${totalPages > 0 ? totalPages : 1}"></span><br
+                \>
         </div>
-        <div class="row">
-            <!-- Warunkowe wyświetlanie przycisku "Poprzednia" -->
-            <a class="btn btn-primary" th:if="${currentPage > 0}"
-               th:href="@{/listofproducts(page=${currentPage == 0 ? 0 : currentPage - 1}, size=${size}, sort=${sort}, dir=${dir})}">Poprzednia</a>
-            <!-- Warunkowe wyświetlanie przycisku "Następna" -->
-            <a class="btn btn-primary" th:if="${currentPage + 1 < totalPages}"
-               th:href="@{/listofproducts(page=${currentPage + 1}, size=${size}, sort=${sort}, dir=${dir})}">Następna</a>
-        </div>
+
     </div>
+    <!-- Warunkowe wyświetlanie przycisku "Poprzednia" -->
+    <a class="btn btn-primary" th:if="${currentPage > 0}" th:text="#{list_of_products.previous}"
+       th:href="@{/listofproducts(page=${currentPage == 0 ? 0 : currentPage - 1}, size=${size}, sort=${sort}, dir=${dir})}"></a>
+    <!-- Warunkowe wyświetlanie przycisku "Następna" -->
+    <a class="btn btn-primary" th:if="${currentPage + 1 < totalPages}" th:text="#{list_of_products.next}"
+       th:href="@{/listofproducts(page=${currentPage + 1}, size=${size}, sort=${sort}, dir=${dir})}"></a>
+    <br>
 
 
     <a href="/addproduct" class="btn btn-primary" th:text="#{index.add_button_product}"></a>

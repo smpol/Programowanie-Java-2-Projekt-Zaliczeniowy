@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <title>Add Product</title>
+    <title th:text="#{add_product.title}"></title>
 </head>
 <body>
 
@@ -40,9 +40,7 @@
                  th:errors="*{descriptionOfProduct}"></div>
         </div>
         <div class="mb-3">
-            <label for="categoryOfProduct" th:text="#{add_product.category_of_product_add}" class="form-label">Category
-                of Product</label>
-            <!--            <input type="text" id="categoryOfProduct" th:field="*{categoryOfProduct}" class="form-control" th:placeholder="#{add_product.category_of_product}">-->
+            <label for="categoryOfProduct" th:text="#{add_product.category_of_product_add}" class="form-label"></label>
             <select id="category" th:field="*{category}" class="form-select">
                 <option th:each="category : ${categories}" th:value="${category.id}"
                         th:text="${category.nameOfCategory}"></option>
