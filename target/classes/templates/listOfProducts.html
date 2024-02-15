@@ -47,7 +47,9 @@
                 <th scope="col"><a th:text="#{list_of_product.description}"
                                    th:href="@{/listofproducts(sort='descriptionOfProduct', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}"></a>
                 </th>
-                <th scope="col" th:text="#{list_of_products.category}"></th>
+                <th scope="col"><a th:text="#{list_of_products.category}"
+                                   th:href="@{/listofproducts(sort='category.nameOfCategory', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}"></a>
+                </th>
                 <th scope="col"><a th:text="#{list_of_product.date_add}"
                                    th:href="@{/listofproducts(sort='dateOfAddition', dir=${dir == 'asc' ? 'desc' : 'asc'}, page=0, size=${size})}">
                 </a></th>
